@@ -1,0 +1,10 @@
+// create database
+create database user_management
+
+// add properties
+spring.datasource.url=jdbc:mysql://localhost:3306/user
+spring.datasource.username=root
+spring.datasource.password=Akash@2023
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=update
