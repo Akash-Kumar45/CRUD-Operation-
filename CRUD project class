@@ -1,0 +1,82 @@
+package com.example.demo;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class Bootjpaexample2Application {
+
+	public static   void main(String[] args) {
+		ConfigurableApplicationContext context = SpringApplication.run(Bootjpaexample2Application.class, args);
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		
+//		User user = new User();
+//		user.setName("Akash");
+//		user.setCity("Lucknow");
+//		user.setStatus("student");
+//		
+//		User user1 = userRepository.save(user);
+//		System.out.println(user1);
+		
+		
+		
+		User user1 = new User();
+		user1.setName("Akash");
+		user1.setCity("Lucknow");
+		user1.setStatus("student");
+		
+		User user2 = new User();
+		user2.setName("Kumar");
+		user2.setCity("Lucknow");
+		user2.setStatus("student");
+		// saving single user
+		//User resultUser = userRepository.save(user1);
+		//saving multiple user below
+		List<User> users = List.of(user1,user2);
+		Iterable<User> result = userRepository.saveAll(users);
+		
+		result.forEach(user->{
+			System.out.println(user);
+		});
+		
+//     	System.out.println("Saved user"+ resultUser);
+		System.out.println("done");
+		
+		
+		
+		
+		
+		// update
+		
+		Optional<User> optional = userRepository.findById(11);
+		// checking if present
+		User user = optional.get();
+		user.setName("Akash Kumar");
+		User result1 = userRepository.save(user);
+		System.out.println(result1);
+		
+		
+		
+		// getting the data
+		// (1) findById(id)
+		// (2) findByALL(id) 
+		
+		
+		// deleting
+		userRepository.delete(result1); // for speific
+		userRepository.deleteAll(); // for deleting all data
+		userRepository.deleteById(11); // for specific ID
+		// few more are there
+		
+		
+		
+		
+		
+		
+	}
+
+}
